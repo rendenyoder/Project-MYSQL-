@@ -1,12 +1,10 @@
 package com.example;
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
-import javax.persistence.EntityManager;
+import org.springframework.http.ResponseEntity;
 import javax.persistence.PersistenceContext;
+import org.springframework.http.HttpStatus;
+import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-
 /**
  * Data Access Object - provide some specific data operations without exposing details of the database
  * Access data for the Greeting entity.
@@ -23,21 +21,15 @@ public class VehicleDao {
     @PersistenceContext
     private EntityManager entityManager;
 
-    //Insert vehicle into the database.
-    public Vehicle add(Vehicle vehicle) {
-        vehicle.setId(null);
+    //Insert greeting into the database.
+    public void add(Vehicle vehicle) {
         entityManager.persist(vehicle);
-        return vehicle;
+        return;
     }
 
-    //Return the vehicle with the passed-in id.
+    //Return the greeting with the passed-in id.
     public Vehicle getById(int id) {
         return entityManager.find(Vehicle.class, id);
-    }
-
-    //Update given vehicle in database
-    public Vehicle updateVehicle(Vehicle vehicle){
-        return entityManager.merge(vehicle);
     }
 
     //Find vehicle with given id and remove from database
@@ -48,5 +40,10 @@ public class VehicleDao {
         } catch (Exception e){
             return new ResponseEntity<String>(HttpStatus.BAD_REQUEST);
         }
+    }
+
+    //Update vehicle in inventory
+    public Vehicle updateVehicle(Vehicle vehicle){
+        return entityManager.merge(vehicle);
     }
 }

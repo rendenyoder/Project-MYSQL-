@@ -1,8 +1,7 @@
 package com.example;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import javax.persistence.*;
 import java.io.Serializable;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "inventory")
@@ -34,8 +33,11 @@ public class Vehicle implements Serializable{
     //Convert car attributes to JSON object
     public String toJSON(){
         ObjectMapper mapper = new ObjectMapper();
-        try {return (mapper.writeValueAsString(this));}
-        catch (Exception e){return null;}
+        try {
+            return (mapper.writeValueAsString(this));
+        } catch (Exception e){
+            return null;
+        }
     }
     //Getters
     public Integer getId() {
